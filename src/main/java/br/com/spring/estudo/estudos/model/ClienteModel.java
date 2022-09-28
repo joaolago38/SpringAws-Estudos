@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -29,7 +29,7 @@ public class ClienteModel {
     @Column(name = "activebool")
     private Boolean activebool;
     @Column(name = "create_date")
-    private Date createDate;
+    private LocalDateTime createDate;
     @Column(name = "active")
     private Boolean active;
 

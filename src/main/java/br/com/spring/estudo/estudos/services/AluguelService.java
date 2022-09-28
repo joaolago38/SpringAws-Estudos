@@ -34,4 +34,6 @@ public class AluguelService {
     public void delete(AluguelModel aluguelModel) {
         aluguelRepository.delete(aluguelModel);
     }
+
+
 }

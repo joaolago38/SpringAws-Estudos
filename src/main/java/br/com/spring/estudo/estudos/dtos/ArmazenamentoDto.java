@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 public class ArmazenamentoDto {
 
     @NotBlank
-    private Long storeId;
+    private Integer storeId;
     @NotBlank
     private Long managerStaffId;
     @NotBlank

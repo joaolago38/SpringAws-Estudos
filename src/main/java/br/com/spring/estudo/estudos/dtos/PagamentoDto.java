@@ -1,11 +1,9 @@
 package br.com.spring.estudo.estudos.dtos;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Getter
@@ -13,7 +11,7 @@ import java.util.Date;
 public class PagamentoDto {
 
     @NotBlank
-    private Long paymentId;
+    private Integer paymentId;
     @NotBlank
     private Long customerId;
     @NotBlank

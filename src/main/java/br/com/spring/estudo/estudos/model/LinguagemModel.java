@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -18,6 +18,6 @@ public class LinguagemModel {
     @Column(name = "name")
     private String name;
     @Column(name = "last_update")
-    private Date lastUpdate;
+    private LocalDateTime lastUpdate;
 
 }

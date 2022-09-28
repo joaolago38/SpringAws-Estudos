@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -14,7 +14,7 @@ import java.util.Date;
 public class PagamentoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer payment_id;
+    private Integer paymenId;
     @Column(name = "customer_id")
     private Long customerId;
     @Column(name = "staff_id")
@@ -24,5 +24,5 @@ public class PagamentoModel {
     @Column(name = "amount")
     private Long amount;
     @Column(name = "payment_date")
-    private Date paymentDate;
+    private LocalDateTime paymentDate;
 }

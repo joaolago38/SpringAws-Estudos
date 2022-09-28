@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -14,9 +14,9 @@ import java.util.Date;
 public class CidadeModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer city_id;
+    private Integer cityid;
     @Column(name = "country_id")
-    private Long countryId;
+    private Integer countryId;
     @Column(name = "last_update")
-    private Date lastUpdate;
+    private LocalDateTime lastUpdate;
 }

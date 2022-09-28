@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -14,5 +14,5 @@ public class FilmeActorDto {
     @NotBlank
     private Integer filmId;
     @NotBlank
-    private Date lastUpdate;
+    private LocalDateTime lastUpdate;
 }

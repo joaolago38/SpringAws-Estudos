@@ -11,7 +11,7 @@ import java.util.Date;
 public class CidadeDto {
 
     @NotBlank
-    private Long city_id;
+    private Integer cityId;
     @NotBlank
     private Long countryId;
     @NotBlank

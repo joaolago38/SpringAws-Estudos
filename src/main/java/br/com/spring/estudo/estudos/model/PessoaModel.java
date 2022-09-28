@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -32,7 +32,7 @@ public class PessoaModel {
     @Column(name = "password")
     private String password;
     @Column(name = "last_update")
-    private Date lastUpdate;
+    private LocalDateTime lastUpdate;
     @Column(name = "picture")
     private String picture;
 }

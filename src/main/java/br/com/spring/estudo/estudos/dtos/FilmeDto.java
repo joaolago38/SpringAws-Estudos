@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-public class FilmDto {
+public class FilmeDto {
 
     @NotBlank
     private  Integer filmId;

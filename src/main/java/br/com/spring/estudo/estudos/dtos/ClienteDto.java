@@ -11,7 +11,7 @@ import java.util.Date;
 public class ClienteDto {
 
     @NotBlank
-    private Long customerId;
+    private Integer customerId;
     @NotBlank
     private Long storeId;
     @NotBlank

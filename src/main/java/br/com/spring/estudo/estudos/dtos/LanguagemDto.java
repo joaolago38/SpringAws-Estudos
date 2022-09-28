@@ -11,7 +11,7 @@ import java.util.Date;
 public class LanguagemDto {
 
     @NotBlank
-    private  Long languageId;
+    private  Integer languageId;
     @NotBlank
     private String name;
     @NotBlank

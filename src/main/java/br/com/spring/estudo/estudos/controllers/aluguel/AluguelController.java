@@ -16,11 +16,11 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Optional;
-import java.util.UUID;
+
 
 
 @RestController
-//@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/buscarAluguel")
 public class AluguelController {
 
@@ -47,16 +47,19 @@ public class AluguelController {
 
     @DeleteMapping("/{rentalId}")
     public ResponseEntity<Object> deleteAluguelModel(@PathVariable(value = "rentalId") Integer rentalId){
-        Optional<AluguelModel> parkingSpotModelOptional = aluguelService.findById(rentalId);
-        if (!parkingSpotModelOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Parking Spot not found.");
+        Optional<AluguelModel> aluguelModelOptional = aluguelService.findById(rentalId);
+        if (!aluguelModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Alugeul nao econtrado.");
         }
-        aluguelService.delete(parkingSpotModelOptional.get());
-        return ResponseEntity.status(HttpStatus.OK).body("Parking Spot deleted successfully.");
+        aluguelService.delete(aluguelModelOptional.get());
+        return ResponseEntity.status(HttpStatus.OK).body("Aluguel deletado com sucesso");
     }
     @PostMapping
     public ResponseEntity<Object> saveAluguel(@RequestBody @Valid AluguelDto aluguelDto){
-
+        var valorLocacao = aluguelService.findById(aluguelDto.getRentalId());
+        if(valorLocacao.isPresent()){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Aluguel ja cadastrado!");
+        }
         var aluguelModel = new AluguelModel();
         BeanUtils.copyProperties(aluguelDto, aluguelModel);
         aluguelModel.setLastUpdate(LocalDateTime.now(ZoneId.of("UTC")));

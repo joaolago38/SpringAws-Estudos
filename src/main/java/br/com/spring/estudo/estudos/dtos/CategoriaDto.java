@@ -10,7 +10,7 @@ import java.util.Date;
 @Setter
 public class CategoriaDto {
     @NotBlank
-    private Long categoryId;
+    private Integer categoryId;
     @NotBlank
     private Date lastUpdate;
 

@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -16,9 +16,9 @@ public class InventarioModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer inventoryId;
     @Column(name = "film_id")
-    private Long filmId;
+    private Integer filmId;
     @Column(name = "store_id")
-    private Long storeId;
+    private Integer storeId;
     @Column(name = "last_update")
-    private Date lastUpdate;
+    private LocalDateTime lastUpdate;
 }
