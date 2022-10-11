@@ -13,7 +13,8 @@ import java.time.LocalDateTime;
 @Setter
 public class PagamentoModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator="payment_payment_id_seq")
+    @SequenceGenerator(name="payment_payment_id_seq", sequenceName="payment_payment_id_seqactor_actor_id_seq",allocationSize = 1)
     private Integer paymenId;
     @Column(name = "customer_id")
     private Long customerId;

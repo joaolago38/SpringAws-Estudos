@@ -31,7 +31,7 @@ public class ArmazenamentoController {
 
 
     @GetMapping("")
-    public ResponseEntity<Page<ArmazenamentoModel>> getAluguelTodos(@PageableDefault(page = 0, size = 1000, sort = "rentalId", direction = Sort.Direction.ASC) Pageable pageable){
+    public ResponseEntity<Page<ArmazenamentoModel>> getAluguelTodos(@PageableDefault(page = 0, size = 1000, sort = "storeId", direction = Sort.Direction.ASC) Pageable pageable){
         return ResponseEntity.status(HttpStatus.OK).body(armazenamentoService.findAll(pageable));
     }
 

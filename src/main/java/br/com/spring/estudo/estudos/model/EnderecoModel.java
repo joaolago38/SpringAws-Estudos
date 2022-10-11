@@ -13,7 +13,8 @@ import java.time.LocalDateTime;
 @Setter
 public class EnderecoModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator="address_address_id_seq")
+    @SequenceGenerator(name="address_address_id_seq", sequenceName="address_address_id_seq",allocationSize = 1)
     private Integer addressId;
     @Column(name = "address")
     private String address;

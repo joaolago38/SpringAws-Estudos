@@ -15,7 +15,8 @@ import java.time.LocalDateTime;
 @Setter
 public class AtorModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator="actor_actor_id_seq")
+    @SequenceGenerator(name="actor_actor_id_seq", sequenceName="actor_actor_id_seq",allocationSize = 1)
     private  Integer actorId;
     @Column(name = "first_name")
     private String firstName;

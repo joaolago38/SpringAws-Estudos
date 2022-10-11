@@ -13,7 +13,8 @@ import java.time.LocalDateTime;
 @Setter
 public class LinguagemModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator="language_language_id_seq")
+    @SequenceGenerator(name="language_language_id_seq", sequenceName="language_language_id_seq",allocationSize = 1)
     private  Integer languageId;
     @Column(name = "name")
     private String name;

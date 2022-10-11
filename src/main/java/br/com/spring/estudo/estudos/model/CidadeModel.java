@@ -13,7 +13,8 @@ import java.time.LocalDateTime;
 @Setter
 public class CidadeModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator="city_city_id_seq")
+    @SequenceGenerator(name="city_city_id_seq", sequenceName="city_city_id_seq",allocationSize = 1)
     private Integer cityid;
     @Column(name = "country_id")
     private Integer countryId;

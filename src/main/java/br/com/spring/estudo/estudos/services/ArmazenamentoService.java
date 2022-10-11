@@ -26,8 +26,8 @@ public class ArmazenamentoService {
         return armazenamentoRepository.findAll(pageable);
     }
 
-    public Optional<ArmazenamentoModel> findById(Integer filmId) {
-        return armazenamentoRepository.findById(filmId);
+    public Optional<ArmazenamentoModel> findById(Integer storeId) {
+        return armazenamentoRepository.findById(storeId);
     }
     @Transactional
     public void delete(ArmazenamentoModel armazenamentoModel) {

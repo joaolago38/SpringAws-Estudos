@@ -32,7 +32,7 @@ public class AtorController {
 
 
     @GetMapping("")
-    public ResponseEntity<Page<AtorModel>> getAluguelTodos(@PageableDefault(page = 0, size = 1000, sort = "rentalId", direction = Sort.Direction.ASC) Pageable pageable){
+    public ResponseEntity<Page<AtorModel>> getAluguelTodos(@PageableDefault(page = 0, size = 1000, sort = "actorId", direction = Sort.Direction.ASC) Pageable pageable){
         return ResponseEntity.status(HttpStatus.OK).body(atorService.findAll(pageable));
     }
 

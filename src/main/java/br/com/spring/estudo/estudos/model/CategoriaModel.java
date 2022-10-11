@@ -8,12 +8,13 @@ import java.time.LocalDateTime;
 
 
 @Entity
-@Table(name = "category")
-@Getter
 @Setter
+@Getter
+@Table(name = "category")
 public class CategoriaModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator="category_category_id_seq")
+    @SequenceGenerator(name="category_category_id_seq", sequenceName="category_category_id_seq",allocationSize = 1)
     private Integer categoryId;
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;

@@ -12,7 +12,8 @@ import javax.persistence.*;
 @Setter
 public class FilmeModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator="film_film_id_seq")
+    @SequenceGenerator(name="film_film_id_seq", sequenceName="film_film_id_seq",allocationSize = 1)
     private  Integer filmId;
     @Column(name = "title")
     private String title;

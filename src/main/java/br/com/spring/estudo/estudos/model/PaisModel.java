@@ -13,7 +13,8 @@ import java.time.LocalDateTime;
 @Setter
 public class PaisModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator="country_country_id_seq")
+    @SequenceGenerator(name="country_country_id_seq", sequenceName="country_country_id_seq",allocationSize = 1)
     private Integer  countryId;
     @Column(name = "country")
     private String country;

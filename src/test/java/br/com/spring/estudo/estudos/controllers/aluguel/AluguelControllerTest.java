@@ -1,17 +1,53 @@
-//package br.com.spring.estudo.estudos.controllers.aluguel;
-//
-//import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-//
-//@WebMvcTest
-//class AluguelControllerTest {
-//
-////    @Autowired
-////    private MockMvc mockMvc;
-////
-////    @Autowired
-////    private ObjectMapper objectMapper;
-////
-////    @MockBean
-////    private AluguelService aluguelService;
-//
-////}
+package br.com.spring.estudo.estudos.controllers.aluguel;
+
+import br.com.spring.estudo.estudos.model.AluguelModel;
+import br.com.spring.estudo.estudos.services.AluguelService;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+@RunWith(SpringRunner.class)
+@WebMvcTest(AluguelController.class)
+public class AluguelControllerTest  {
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockBean
+    private AluguelService aluguelService;
+
+    @Test
+    public void  listarTodosAlgueisCadastrados()
+            throws Exception {
+
+        AluguelModel aluguel = new AluguelModel();
+        List<AluguelModel> allUsers = Arrays.asList(aluguel);
+
+//        given(aluguelService
+//                .findAll(pageable))
+//                .willReturn((Page<AluguelModel>) allUsers);
+
+        mockMvc.perform(get("/users")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(1)));
+
+    }
+
+
+}

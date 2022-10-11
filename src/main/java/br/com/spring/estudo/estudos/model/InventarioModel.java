@@ -13,7 +13,8 @@ import java.time.LocalDateTime;
 @Setter
 public class InventarioModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator="inventory_inventory_id_seq")
+    @SequenceGenerator(name="inventory_inventory_id_seq", sequenceName="inventory_inventory_id_seq",allocationSize = 1)
     private Integer inventoryId;
     @Column(name = "film_id")
     private Integer filmId;

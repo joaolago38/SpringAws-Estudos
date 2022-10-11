@@ -13,7 +13,8 @@ import java.time.LocalDateTime;
 @Setter
 public class PessoaModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator="staff_staff_id_seq")
+    @SequenceGenerator(name="staff_staff_id_seq", sequenceName="staff_staff_id_seq",allocationSize = 1)
     private Integer staffId;
     @Column(name = "first_name")
     private String firstName;
@@ -24,7 +25,7 @@ public class PessoaModel {
     @Column(name = "email")
     private String email;
     @Column(name = "store_id")
-    private String storeId;
+    private Integer storeId;
     @Column(name = "active")
     private Boolean active;
     @Column(name = "username")

@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class ClienteModel {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator="customer_customer_id_seq")
+    @SequenceGenerator(name="customer_customer_id_seq", sequenceName="customer_customer_id_seq",allocationSize = 1)
     private Integer customerId;
     @Column(name = "store_id")
     private Integer storeId;
