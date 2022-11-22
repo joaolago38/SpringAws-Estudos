@@ -1,5 +1,6 @@
 package br.com.spring.estudo.estudos.model;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "city")
 @Getter
 @Setter
+@Builder
 public class CidadeModel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE , generator="city_city_id_seq")
@@ -20,4 +22,8 @@ public class CidadeModel {
     private Integer countryId;
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
+
+    public CidadeModel() {
+
+    }
 }

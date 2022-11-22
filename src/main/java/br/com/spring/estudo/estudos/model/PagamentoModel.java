@@ -1,5 +1,6 @@
 package br.com.spring.estudo.estudos.model;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "payment")
 @Getter
 @Setter
+@Builder
 public class PagamentoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE , generator="payment_payment_id_seq")
@@ -26,4 +28,8 @@ public class PagamentoModel {
     private Long amount;
     @Column(name = "payment_date")
     private LocalDateTime paymentDate;
+
+    public PagamentoModel() {
+
+    }
 }

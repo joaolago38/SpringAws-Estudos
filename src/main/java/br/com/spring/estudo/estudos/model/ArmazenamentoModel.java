@@ -1,5 +1,6 @@
 package br.com.spring.estudo.estudos.model;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @Table(name = "store")
 @Getter
 @Setter
+@Builder
 public class ArmazenamentoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE , generator="store_store_id_seq")
@@ -23,4 +25,8 @@ public class ArmazenamentoModel {
     private Long addressId;
     @Column(name = "lastUpdate")
     private LocalDateTime lastUpdate;
+
+    public ArmazenamentoModel() {
+
+    }
 }

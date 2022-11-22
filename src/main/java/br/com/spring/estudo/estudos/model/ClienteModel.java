@@ -1,5 +1,6 @@
 package br.com.spring.estudo.estudos.model;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "customer")
 @Getter
 @Setter
+@Builder
 public class ClienteModel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE , generator="customer_customer_id_seq")
@@ -33,4 +35,7 @@ public class ClienteModel {
     @Column(name = "active")
     private Boolean active;
 
+    public ClienteModel() {
+
+    }
 }

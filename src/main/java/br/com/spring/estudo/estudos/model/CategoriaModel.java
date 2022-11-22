@@ -1,5 +1,6 @@
 package br.com.spring.estudo.estudos.model;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 @Entity
 @Setter
 @Getter
+@Builder
 @Table(name = "category")
 public class CategoriaModel {
     @Id
@@ -18,4 +20,8 @@ public class CategoriaModel {
     private Integer categoryId;
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
+
+    public CategoriaModel() {
+
+    }
 }

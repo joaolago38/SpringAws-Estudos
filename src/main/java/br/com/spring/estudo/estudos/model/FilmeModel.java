@@ -1,5 +1,6 @@
 package br.com.spring.estudo.estudos.model;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Table(name = "film")
 @Getter
 @Setter
+@Builder
 public class FilmeModel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE , generator="film_film_id_seq")
@@ -31,4 +33,8 @@ public class FilmeModel {
     private Integer length;
     @Column(name = "replacement_cost")
     private String replacementCost;
+
+    public FilmeModel() {
+
+    }
 }

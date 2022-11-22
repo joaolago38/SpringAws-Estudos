@@ -1,5 +1,6 @@
 package br.com.spring.estudo.estudos.model;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "staff")
 @Getter
 @Setter
+@Builder
 public class PessoaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE , generator="staff_staff_id_seq")
@@ -36,4 +38,8 @@ public class PessoaModel {
     private LocalDateTime lastUpdate;
     @Column(name = "picture")
     private String picture;
+
+    public PessoaModel() {
+
+    }
 }

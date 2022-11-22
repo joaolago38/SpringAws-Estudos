@@ -1,5 +1,6 @@
 package br.com.spring.estudo.estudos.model;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "inventory")
 @Getter
 @Setter
+@Builder
 public class InventarioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE , generator="inventory_inventory_id_seq")

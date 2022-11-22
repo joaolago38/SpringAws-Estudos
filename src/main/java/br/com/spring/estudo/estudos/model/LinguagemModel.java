@@ -1,5 +1,6 @@
 package br.com.spring.estudo.estudos.model;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "language")
 @Getter
 @Setter
+@Builder
 public class LinguagemModel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE , generator="language_language_id_seq")
@@ -21,4 +23,7 @@ public class LinguagemModel {
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
 
+    public LinguagemModel() {
+
+    }
 }

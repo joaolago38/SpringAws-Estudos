@@ -1,5 +1,6 @@
 package br.com.spring.estudo.estudos.model;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "film_actor")
 @Getter
 @Setter
+@Builder
 public class FilmeAtorModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,4 +22,7 @@ public class FilmeAtorModel {
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
 
+    public FilmeAtorModel() {
+
+    }
 }

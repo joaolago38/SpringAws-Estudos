@@ -1,5 +1,6 @@
 package br.com.spring.estudo.estudos.model;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "address")
 @Getter
 @Setter
+@Builder
 public class EnderecoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE , generator="address_address_id_seq")
@@ -30,4 +32,8 @@ public class EnderecoModel {
     private String phone;
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
+
+    public EnderecoModel() {
+
+    }
 }

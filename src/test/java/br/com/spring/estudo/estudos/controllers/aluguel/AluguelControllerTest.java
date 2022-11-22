@@ -32,20 +32,7 @@ public class AluguelControllerTest  {
     private AluguelService aluguelService;
 
     @Test
-    public void  listarTodosAlgueisCadastrados()
-            throws Exception {
-
-        AluguelModel aluguel = new AluguelModel();
-        List<AluguelModel> allUsers = Arrays.asList(aluguel);
-
-//        given(aluguelService
-//                .findAll(pageable))
-//                .willReturn((Page<AluguelModel>) allUsers);
-
-        mockMvc.perform(get("/users")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(1)));
+    public void createAluguelModel_whenPostMethod() throws Exception {
 
     }
 

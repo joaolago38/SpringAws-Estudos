@@ -1,6 +1,7 @@
 package br.com.spring.estudo.estudos.model;
 
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,10 +14,11 @@ import java.time.LocalDateTime;
 @Table(name = "rental")
 @Getter
 @Setter
+@Builder
 public class AluguelModel implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator="rental_rental_id_seq")
-    @SequenceGenerator(name="rental_rental_id_seq", sequenceName="rental_rental_id_seq",allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rental_rental_id_seq")
+    @SequenceGenerator(name = "rental_rental_id_seq", sequenceName = "rental_rental_id_seq", allocationSize = 1)
     private Integer rentalId;
     @Column(name = "rental_date")
     private LocalDateTime rentalDate;
@@ -32,4 +34,17 @@ public class AluguelModel implements Serializable {
     private LocalDateTime lastUpdate;
 
 
+    public AluguelModel(Integer rentalId, LocalDateTime rentalDate, LocalDateTime returnDate, Integer customerId, Integer staffId, Integer inventoryId, LocalDateTime lastUpdate) {
+        this.rentalId = rentalId;
+        this.rentalDate = rentalDate;
+        this.returnDate = returnDate;
+        this.customerId = customerId;
+        this.staffId = staffId;
+        this.inventoryId = inventoryId;
+        this.lastUpdate = lastUpdate;
+    }
+
+    public AluguelModel() {
+
+    }
 }
