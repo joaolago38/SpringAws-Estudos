@@ -1,5 +1,9 @@
 package br.com.spring.estudo.estudos.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,5 +27,18 @@ public class InventarioModel {
     @Column(name = "store_id")
     private Integer storeId;
     @Column(name = "last_update")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime lastUpdate;
+
+    public InventarioModel() {
+
+    }
+
+    public InventarioModel(Integer inventoryId, Integer filmId, Integer storeId, LocalDateTime lastUpdate) {
+        this.inventoryId = inventoryId;
+        this.filmId = filmId;
+        this.storeId = storeId;
+        this.lastUpdate = lastUpdate;
+    }
 }

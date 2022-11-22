@@ -1,5 +1,9 @@
 package br.com.spring.estudo.estudos.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,9 +25,17 @@ public class CidadeModel {
     @Column(name = "country_id")
     private Integer countryId;
     @Column(name = "last_update")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime lastUpdate;
 
     public CidadeModel() {
 
+    }
+
+    public CidadeModel(Integer cityid, Integer countryId, LocalDateTime lastUpdate) {
+        this.cityid = cityid;
+        this.countryId = countryId;
+        this.lastUpdate = lastUpdate;
     }
 }

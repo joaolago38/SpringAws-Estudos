@@ -1,5 +1,9 @@
 package br.com.spring.estudo.estudos.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,11 +35,25 @@ public class ClienteModel {
     @Column(name = "activebool")
     private Boolean activebool;
     @Column(name = "create_date")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime createDate;
     @Column(name = "active")
     private Boolean active;
 
     public ClienteModel() {
 
+    }
+
+    public ClienteModel(Integer customerId, Integer storeId, String firstName, String lastName, String email, Long addressId, Boolean activebool, LocalDateTime createDate, Boolean active) {
+        this.customerId = customerId;
+        this.storeId = storeId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.addressId = addressId;
+        this.activebool = activebool;
+        this.createDate = createDate;
+        this.active = active;
     }
 }

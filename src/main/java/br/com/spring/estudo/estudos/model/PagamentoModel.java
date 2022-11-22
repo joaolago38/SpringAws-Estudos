@@ -1,5 +1,9 @@
 package br.com.spring.estudo.estudos.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,9 +31,20 @@ public class PagamentoModel {
     @Column(name = "amount")
     private Long amount;
     @Column(name = "payment_date")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime paymentDate;
 
     public PagamentoModel() {
 
+    }
+
+    public PagamentoModel(Integer paymenId, Long customerId, Long staffId, Long rentalId, Long amount, LocalDateTime paymentDate) {
+        this.paymenId = paymenId;
+        this.customerId = customerId;
+        this.staffId = staffId;
+        this.rentalId = rentalId;
+        this.amount = amount;
+        this.paymentDate = paymentDate;
     }
 }

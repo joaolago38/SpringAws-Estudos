@@ -1,6 +1,10 @@
 package br.com.spring.estudo.estudos.model;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,8 +25,12 @@ public class AluguelModel implements Serializable {
     @SequenceGenerator(name = "rental_rental_id_seq", sequenceName = "rental_rental_id_seq", allocationSize = 1)
     private Integer rentalId;
     @Column(name = "rental_date")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime rentalDate;
     @Column(name = "return_date")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime returnDate;
     @Column(name = "customer_id")
     private Integer customerId;
@@ -31,6 +39,8 @@ public class AluguelModel implements Serializable {
     @Column(name = "inventory_id")
     private Integer inventoryId;
     @Column(name = "last_update")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime lastUpdate;
 
 
@@ -47,4 +57,6 @@ public class AluguelModel implements Serializable {
     public AluguelModel() {
 
     }
+
+
 }
