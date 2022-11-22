@@ -32,4 +32,13 @@ public class PagamentoModel {
     public PagamentoModel() {
 
     }
+
+    public PagamentoModel(Integer paymenId, Long customerId, Long staffId, Long rentalId, Long amount, LocalDateTime paymentDate) {
+        this.paymenId = paymenId;
+        this.customerId = customerId;
+        this.staffId = staffId;
+        this.rentalId = rentalId;
+        this.amount = amount;
+        this.paymentDate = paymentDate;
+    }
 }

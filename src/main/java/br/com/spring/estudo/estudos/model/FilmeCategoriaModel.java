@@ -25,4 +25,10 @@ public class FilmeCategoriaModel {
     public FilmeCategoriaModel() {
 
     }
+
+    public FilmeCategoriaModel(Integer filmId, Integer categoryId, LocalDateTime lastUpdate) {
+        this.filmId = filmId;
+        this.categoryId = categoryId;
+        this.lastUpdate = lastUpdate;
+    }
 }

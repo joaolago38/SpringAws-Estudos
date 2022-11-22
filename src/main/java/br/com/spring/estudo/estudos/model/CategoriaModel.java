@@ -24,4 +24,9 @@ public class CategoriaModel {
     public CategoriaModel() {
 
     }
+
+    public CategoriaModel(Integer categoryId, LocalDateTime lastUpdate) {
+        this.categoryId = categoryId;
+        this.lastUpdate = lastUpdate;
+    }
 }

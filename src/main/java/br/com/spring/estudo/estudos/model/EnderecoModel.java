@@ -36,4 +36,15 @@ public class EnderecoModel {
     public EnderecoModel() {
 
     }
+
+    public EnderecoModel(Integer addressId, String address, String address2, String district, Long cityId, String postalCode, String phone, LocalDateTime lastUpdate) {
+        this.addressId = addressId;
+        this.address = address;
+        this.address2 = address2;
+        this.district = district;
+        this.cityId = cityId;
+        this.postalCode = postalCode;
+        this.phone = phone;
+        this.lastUpdate = lastUpdate;
+    }
 }

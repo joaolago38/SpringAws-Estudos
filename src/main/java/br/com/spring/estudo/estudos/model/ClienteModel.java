@@ -38,4 +38,16 @@ public class ClienteModel {
     public ClienteModel() {
 
     }
+
+    public ClienteModel(Integer customerId, Integer storeId, String firstName, String lastName, String email, Long addressId, Boolean activebool, LocalDateTime createDate, Boolean active) {
+        this.customerId = customerId;
+        this.storeId = storeId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.addressId = addressId;
+        this.activebool = activebool;
+        this.createDate = createDate;
+        this.active = active;
+    }
 }

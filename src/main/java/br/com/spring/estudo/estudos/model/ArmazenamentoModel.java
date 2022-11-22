@@ -29,4 +29,11 @@ public class ArmazenamentoModel {
     public ArmazenamentoModel() {
 
     }
+
+    public ArmazenamentoModel(Integer storeId, Integer managerStaffId, Long addressId, LocalDateTime lastUpdate) {
+        this.storeId = storeId;
+        this.managerStaffId = managerStaffId;
+        this.addressId = addressId;
+        this.lastUpdate = lastUpdate;
+    }
 }

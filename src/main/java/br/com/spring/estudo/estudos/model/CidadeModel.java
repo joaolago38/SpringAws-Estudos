@@ -26,4 +26,10 @@ public class CidadeModel {
     public CidadeModel() {
 
     }
+
+    public CidadeModel(Integer cityid, Integer countryId, LocalDateTime lastUpdate) {
+        this.cityid = cityid;
+        this.countryId = countryId;
+        this.lastUpdate = lastUpdate;
+    }
 }

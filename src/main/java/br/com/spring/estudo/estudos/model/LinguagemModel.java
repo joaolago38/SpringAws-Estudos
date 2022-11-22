@@ -26,4 +26,10 @@ public class LinguagemModel {
     public LinguagemModel() {
 
     }
+
+    public LinguagemModel(Integer languageId, String name, LocalDateTime lastUpdate) {
+        this.languageId = languageId;
+        this.name = name;
+        this.lastUpdate = lastUpdate;
+    }
 }

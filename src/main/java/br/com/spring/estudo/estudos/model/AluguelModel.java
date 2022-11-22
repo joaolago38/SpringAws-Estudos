@@ -47,4 +47,6 @@ public class AluguelModel implements Serializable {
     public AluguelModel() {
 
     }
+
+
 }

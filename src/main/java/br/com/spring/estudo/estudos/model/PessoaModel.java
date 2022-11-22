@@ -42,4 +42,18 @@ public class PessoaModel {
     public PessoaModel() {
 
     }
+
+    public PessoaModel(Integer staffId, String firstName, String lastName, Long addressId, String email, Integer storeId, Boolean active, String username, String password, LocalDateTime lastUpdate, String picture) {
+        this.staffId = staffId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.addressId = addressId;
+        this.email = email;
+        this.storeId = storeId;
+        this.active = active;
+        this.username = username;
+        this.password = password;
+        this.lastUpdate = lastUpdate;
+        this.picture = picture;
+    }
 }

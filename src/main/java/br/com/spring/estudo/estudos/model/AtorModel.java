@@ -30,4 +30,12 @@ public class AtorModel {
     public AtorModel() {
 
     }
+
+
+    public AtorModel(Integer actorId, String firstName, String lastName, LocalDateTime lastUpdate) {
+        this.actorId = actorId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.lastUpdate = lastUpdate;
+    }
 }

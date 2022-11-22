@@ -25,4 +25,10 @@ public class FilmeAtorModel {
     public FilmeAtorModel() {
 
     }
+
+    public FilmeAtorModel(Integer actorId, Integer filmId, LocalDateTime lastUpdate) {
+        this.actorId = actorId;
+        this.filmId = filmId;
+        this.lastUpdate = lastUpdate;
+    }
 }

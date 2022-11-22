@@ -26,4 +26,10 @@ public class PaisModel {
     public PaisModel() {
 
     }
+
+    public PaisModel(Integer countryId, String country, LocalDateTime lastUpdate) {
+        this.countryId = countryId;
+        this.country = country;
+        this.lastUpdate = lastUpdate;
+    }
 }

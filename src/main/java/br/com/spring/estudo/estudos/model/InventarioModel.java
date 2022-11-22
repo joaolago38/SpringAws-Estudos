@@ -24,4 +24,15 @@ public class InventarioModel {
     private Integer storeId;
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
+
+    public InventarioModel() {
+
+    }
+
+    public InventarioModel(Integer inventoryId, Integer filmId, Integer storeId, LocalDateTime lastUpdate) {
+        this.inventoryId = inventoryId;
+        this.filmId = filmId;
+        this.storeId = storeId;
+        this.lastUpdate = lastUpdate;
+    }
 }
