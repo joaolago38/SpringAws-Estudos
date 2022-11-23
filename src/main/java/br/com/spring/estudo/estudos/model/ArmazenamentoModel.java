@@ -26,6 +26,13 @@ public class ArmazenamentoModel {
     @Column(name = "lastUpdate")
     private LocalDateTime lastUpdate;
 
+    public ArmazenamentoModel(Integer storeId, Integer managerStaffId, Long addressId, LocalDateTime lastUpdate) {
+        this.storeId = storeId;
+        this.managerStaffId = managerStaffId;
+        this.addressId = addressId;
+        this.lastUpdate = lastUpdate;
+    }
+
     public ArmazenamentoModel() {
 
     }
