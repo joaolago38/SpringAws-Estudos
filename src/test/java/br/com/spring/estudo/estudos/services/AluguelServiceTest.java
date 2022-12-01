@@ -1,7 +1,55 @@
 package br.com.spring.estudo.estudos.services;
 
-import static org.junit.jupiter.api.Assertions.*;
+import br.com.spring.estudo.estudos.model.AluguelModel;
+import br.com.spring.estudo.estudos.repositores.AluguelRepository;
+import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.runner.RunWith;
+import org.mockito.ArgumentMatchers;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
-class AluguelServiceTest {
+import java.time.LocalDateTime;
+import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.*;
+
+@RunWith(MockitoJUnitRunner.class)
+public class AluguelServiceTest {
+    @Mock
+    private AluguelRepository aluguelRepository;
+
+    @InjectMocks
+    private AluguelService aluguelService;
+
+    @Test
+    @DisplayName("Salvando um aluguel")
+    public void whenSaveUser_shouldReturnUser() {
+        AluguelModel aluguelModel = AluguelModel.builder().rentalId(1).customerId(1).inventoryId(1).lastUpdate(LocalDateTime.now()).rentalDate(LocalDateTime.now()).returnDate(LocalDateTime.now()).staffId(1).build();
+        when(aluguelRepository.save(ArgumentMatchers.any(AluguelModel.class))).thenReturn(aluguelModel);
+        AluguelModel created = aluguelService.save(aluguelModel);
+        assertThat(created.getRentalId()).isSameAs(aluguelModel.getRentalId());
+        verify(aluguelRepository).save(aluguelModel);
+    }
+
+    @Test
+    public void whenGivenId_shouldDeleteUser_ifFound(){
+        AluguelModel aluguelModel = AluguelModel.builder().rentalId(1).customerId(1).inventoryId(1).lastUpdate(LocalDateTime.now()).rentalDate(LocalDateTime.now()).returnDate(LocalDateTime.now()).staffId(1).build();
+        lenient().when(aluguelRepository.findById(aluguelModel.getRentalId())).thenReturn(Optional.of(aluguelModel));
+        aluguelService.delete(aluguelModel);
+        verify(aluguelRepository).delete(aluguelModel);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void should_throw_exception_when_user_doesnt_exist() {
+        AluguelModel aluguelModel = null;
+        when(aluguelRepository.findById(aluguelModel.getRentalId())).thenReturn(Optional.of(aluguelModel));
+
+        given(aluguelRepository.findById(anyInt())).willReturn(Optional.ofNullable(null));
+        verify(aluguelRepository).delete(aluguelModel);
+    }
 }
