@@ -28,7 +28,7 @@ public class AluguelServiceTest {
 
     @Test
     @DisplayName("Salvando um aluguel")
-    public void whenSaveUser_shouldReturnUser() {
+    public void whenSaveUser_shouldReturnUmAluguel() {
         AluguelModel aluguelModel = AluguelModel.builder().rentalId(1).customerId(1).inventoryId(1).lastUpdate(LocalDateTime.now()).rentalDate(LocalDateTime.now()).returnDate(LocalDateTime.now()).staffId(1).build();
         when(aluguelRepository.save(ArgumentMatchers.any(AluguelModel.class))).thenReturn(aluguelModel);
         AluguelModel created = aluguelService.save(aluguelModel);
@@ -37,7 +37,8 @@ public class AluguelServiceTest {
     }
 
     @Test
-    public void whenGivenId_shouldDeleteUser_ifFound(){
+    @DisplayName("deletando um aluguel")
+    public void whenGivenId_shouldDeleteAluguel_ifFound(){
         AluguelModel aluguelModel = AluguelModel.builder().rentalId(1).customerId(1).inventoryId(1).lastUpdate(LocalDateTime.now()).rentalDate(LocalDateTime.now()).returnDate(LocalDateTime.now()).staffId(1).build();
         lenient().when(aluguelRepository.findById(aluguelModel.getRentalId())).thenReturn(Optional.of(aluguelModel));
         aluguelService.delete(aluguelModel);
@@ -45,11 +46,26 @@ public class AluguelServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void should_throw_exception_when_user_doesnt_exist() {
+    @DisplayName("deletando um aluguel com exception")
+    public void should_throw_exception_when_Aluguel_doesnt_exist() {
         AluguelModel aluguelModel = null;
         when(aluguelRepository.findById(aluguelModel.getRentalId())).thenReturn(Optional.of(aluguelModel));
 
         given(aluguelRepository.findById(anyInt())).willReturn(Optional.ofNullable(null));
         verify(aluguelRepository).delete(aluguelModel);
     }
+
+    @Test
+    @DisplayName("deletando um aluguel com exception")
+    public void whenGivenId_shouldUpdateAluguel_ifFound() {
+        AluguelModel aluguelModel = AluguelModel.builder().rentalId(1).customerId(1).inventoryId(1).lastUpdate(LocalDateTime.now()).rentalDate(LocalDateTime.now()).returnDate(LocalDateTime.now()).staffId(1).build();
+        aluguelModel.setInventoryId(4);
+
+        given(aluguelRepository.findById(aluguelModel.getRentalId())).willReturn(Optional.of(aluguelModel));
+        aluguelService.save(aluguelModel);
+
+        verify(aluguelRepository).save(aluguelModel);
+
+    }
+
 }
