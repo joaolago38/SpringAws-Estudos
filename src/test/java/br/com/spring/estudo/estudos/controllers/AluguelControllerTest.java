@@ -1,4 +1,4 @@
-package br.com.spring.estudo.estudos.controllers.aluguel;
+package br.com.spring.estudo.estudos.controllers;
 
 import br.com.spring.estudo.estudos.exception.NegociosException;
 import br.com.spring.estudo.estudos.model.AluguelModel;
