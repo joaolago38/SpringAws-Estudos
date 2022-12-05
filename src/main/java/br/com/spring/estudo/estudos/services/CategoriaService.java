@@ -1,7 +1,7 @@
 package br.com.spring.estudo.estudos.services;
 
 import br.com.spring.estudo.estudos.model.CategoriaModel;
-import br.com.spring.estudo.estudos.repositores.CategoryRepository;
+import br.com.spring.estudo.estudos.repositores.CategoriaRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -12,26 +12,26 @@ import java.util.Optional;
 @Service
 public class CategoriaService {
 
-    final CategoryRepository categoryRepository;
+    final CategoriaRepository categoriaRepository;
 
-    public CategoriaService(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
+    public CategoriaService(CategoriaRepository categoriaRepository) {
+        this.categoriaRepository = categoriaRepository;
     }
 
     @Transactional
     public CategoriaModel save(CategoriaModel categoriaModel) {
-        return categoryRepository.save(categoriaModel);
+        return categoriaRepository.save(categoriaModel);
     }
 
     public Page<CategoriaModel> findAll(Pageable pageable) {
-        return categoryRepository.findAll(pageable);
+        return categoriaRepository.findAll(pageable);
     }
 
     public Optional<CategoriaModel> findById(Integer categoryId) {
-        return categoryRepository.findById(categoryId);
+        return categoriaRepository.findById(categoryId);
     }
     @Transactional
     public void delete(CategoriaModel categoriaModel) {
-        categoryRepository.delete(categoriaModel);
+        categoriaRepository.delete(categoriaModel);
     }
 }
