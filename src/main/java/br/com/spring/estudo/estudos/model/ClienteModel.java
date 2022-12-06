@@ -31,7 +31,7 @@ public class ClienteModel {
     @Column(name = "email")
     private String email;
     @Column(name = "address_id")
-    private Long addressId;
+    private Integer addressId;
     @Column(name = "activebool")
     private Boolean activebool;
     @Column(name = "create_date")
@@ -45,7 +45,7 @@ public class ClienteModel {
 
     }
 
-    public ClienteModel(Integer customerId, Integer storeId, String firstName, String lastName, String email, Long addressId, Boolean activebool, LocalDateTime createDate, Boolean active) {
+    public ClienteModel(Integer customerId, Integer storeId, String firstName, String lastName, String email, Integer addressId, Boolean activebool, LocalDateTime createDate, Boolean active) {
         this.customerId = customerId;
         this.storeId = storeId;
         this.firstName = firstName;

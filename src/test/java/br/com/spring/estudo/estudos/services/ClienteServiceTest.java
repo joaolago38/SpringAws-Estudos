@@ -1,7 +1,9 @@
 package br.com.spring.estudo.estudos.services;
 
 import br.com.spring.estudo.estudos.model.CategoriaModel;
+import br.com.spring.estudo.estudos.model.ClienteModel;
 import br.com.spring.estudo.estudos.repositores.CategoriaRepository;
+import br.com.spring.estudo.estudos.repositores.ClienteRepository;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
@@ -21,36 +23,38 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class ClienteServiceTest {
     @Mock
-    private CategoriaRepository categoriaRespository;
+    private ClienteRepository clienteRespository;
     @InjectMocks
-    private CategoriaService categoriaService;
+    private ClienteService clienteService;
 
     @Test
-    @DisplayName("Salvando um Categoria")
-    public void whenSaveAtor_shouldReturnUmCategoria() {
-        CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-        when(categoriaRespository.save(ArgumentMatchers.any(CategoriaModel.class))).thenReturn(categoriaModel);
-        CategoriaModel created = categoriaService.save(categoriaModel);
-        assertThat(created.getCategoryId()).isSameAs(categoriaModel.getCategoryId());
-        verify(categoriaRespository).save(categoriaModel);
+    @DisplayName("Salvando um Cliente")
+    public void whenSaveAtor_shouldReturnUmCliente() {
+        ClienteModel clienteModel = ClienteModel.builder().active(true).activebool(true).addressId(1).email("joaolago35@gmail.com")
+        .lastName("lago").createDate(LocalDateTime.now()).customerId(1).storeId(2).build();
+        when(clienteRespository.save(ArgumentMatchers.any(ClienteModel.class))).thenReturn(clienteModel);
+        ClienteModel created = clienteService.save(clienteModel);
+        assertThat(created.getCustomerId()).isSameAs(clienteModel.getCustomerId());
+        verify(clienteRespository).save(clienteModel);
     }
 
     @Test
-    @DisplayName("deletando um Categoria")
-    public void whenGivenId_shouldDeleteCategoria_ifFound(){
-        CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-        lenient().when(categoriaRespository.findById(categoriaModel.getCategoryId())).thenReturn(Optional.of(categoriaModel));
-        categoriaService.delete(categoriaModel);
-        verify(categoriaRespository).delete(categoriaModel);
+    @DisplayName("deletando um Cliente")
+    public void whenGivenId_shouldDeleteCliente_ifFound(){
+        ClienteModel clienteModel = ClienteModel.builder().active(true).activebool(true).addressId(1).email("joaolago35@gmail.com")
+                .lastName("lago").createDate(LocalDateTime.now()).customerId(1).storeId(2).build();
+        lenient().when(clienteRespository.findById(clienteModel.getCustomerId())).thenReturn(Optional.of(clienteModel));
+        clienteService.delete(clienteModel);
+        verify(clienteRespository).delete(clienteModel);
     }
 
     @Test(expected = RuntimeException.class)
-    @DisplayName("deletando um Categoria com exception")
-    public void should_throw_exception_when_Categoria_doesnt_exist() {
-        CategoriaModel categoriaModel= null;
-        when(categoriaRespository.findById(categoriaModel.getCategoryId())).thenReturn(Optional.of(categoriaModel));
-        given(categoriaRespository.findById(anyInt())).willReturn(Optional.ofNullable(null));
-        verify(categoriaRespository).delete(categoriaModel);
+    @DisplayName("deletando um Cliente com exception")
+    public void should_throw_exception_when_Cliente_doesnt_exist() {
+        ClienteModel clienteModel = null;
+        when(clienteRespository.findById(clienteModel.getCustomerId())).thenReturn(Optional.of(clienteModel));
+        given(clienteRespository.findById(anyInt())).willReturn(Optional.ofNullable(null));
+        verify(clienteRespository).delete(clienteModel);
     }
 
 
