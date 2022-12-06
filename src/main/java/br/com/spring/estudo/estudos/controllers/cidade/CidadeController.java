@@ -41,7 +41,7 @@ public class CidadeController {
     }
 
     @DeleteMapping("/{categoryId}")
-    public ResponseEntity<Object> deleteArmazenamentoModel(@PathVariable(value = "cityId") Integer cityId){
+    public ResponseEntity<Object> deleteCidadeModel(@PathVariable(value = "cityId") Integer cityId){
         Optional<CidadeModel> cidadeModelOptional = cidadeService.findById(cityId);
         if (!cidadeModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cidade nao encontrado.");

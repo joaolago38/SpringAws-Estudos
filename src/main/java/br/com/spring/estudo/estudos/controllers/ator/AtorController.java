@@ -46,7 +46,7 @@ public class AtorController {
     }
 
     @DeleteMapping("/{actorId}")
-    public ResponseEntity<Object> deleteArmazenamentoModel(@PathVariable(value = "actorId") Integer actorId){
+    public ResponseEntity<Object> deleteAtorModel(@PathVariable(value = "actorId") Integer actorId){
         Optional<AtorModel> armazementoModelOptional = atorService.findById(actorId);
         if (!armazementoModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ator nao econtrado.");

@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class CidadeService {
 
-final CidadeRepository cidadeRepository;
+    final CidadeRepository cidadeRepository;
 
     public CidadeService(CidadeRepository cidadeRepository) {
         this.cidadeRepository = cidadeRepository;

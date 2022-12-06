@@ -1,9 +1,12 @@
 package br.com.spring.estudo.estudos.controllers;
 
 import br.com.spring.estudo.estudos.controllers.categoria.CategoriaController;
+import br.com.spring.estudo.estudos.controllers.cidade.CidadeController;
 import br.com.spring.estudo.estudos.exception.NegociosException;
 import br.com.spring.estudo.estudos.model.CategoriaModel;
+import br.com.spring.estudo.estudos.model.CidadeModel;
 import br.com.spring.estudo.estudos.services.CategoriaService;
+import br.com.spring.estudo.estudos.services.CidadeService;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
@@ -24,43 +27,43 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(CategoriaController.class)
+@WebMvcTest(CidadeController.class)
 public class CidadeControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private CategoriaService categoriaService;
+    private CidadeService cidadeService;
 
         @Test
-        @DisplayName("Salva um novo Categoria")
-        public void createCategoria_whenPostMethod() throws Exception {
-            CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-            given(categoriaService.save(categoriaModel)).willReturn(categoriaModel);
-            mockMvc.perform(post("/buscarCategory")
+        @DisplayName("Salva um novo Cidade")
+        public void createCidade_whenPostMethod() throws Exception {
+            CidadeModel cidadeModel = CidadeModel.builder().cityid(1).countryId(2).lastUpdate(LocalDateTime.now()).build();
+            given(cidadeService.save(cidadeModel)).willReturn(cidadeModel);
+            mockMvc.perform(post("/buscarCidade")
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(com.usersapi.endpoints.util.JsonUtil.toJson(categoriaModel)))
+                            .content(com.usersapi.endpoints.util.JsonUtil.toJson(cidadeModel)))
                     .andExpect(status().is4xxClientError());
 
         }
 
         @Test
-        @DisplayName("Deleta um Categoria pelo id")
-        public void removeCategoriaById_whenDeleteMethod() throws Exception {
-            CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-            doNothing().when(categoriaService).delete(categoriaModel);
-            mockMvc.perform(delete("/buscarCategory/" + categoriaModel.toString())
+        @DisplayName("Deleta um Cidade pelo id")
+        public void removeCidadeById_whenDeleteMethod() throws Exception {
+            CidadeModel cidadeModel = CidadeModel.builder().cityid(1).countryId(2).lastUpdate(LocalDateTime.now()).build();
+            doNothing().when(cidadeService).delete(cidadeModel);
+            mockMvc.perform(delete("/buscarCidade/" + cidadeModel.getCityid().toString())
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isBadRequest());
         }
 
         @Test
-        @DisplayName("Deleta um Categoria que nao existe")
-        public void should_throw_exception_when_Categoria_doesnt_exist() throws Exception {
-            CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-            Mockito.doThrow(new NegociosException(categoriaModel.getCategoryId())).when(categoriaService).delete(categoriaModel);
+        @DisplayName("Deleta um Cidade que nao existe")
+        public void should_throw_exception_when_Cidade_doesnt_exist() throws Exception {
+            CidadeModel cidadeModel = CidadeModel.builder().cityid(null).countryId(2).lastUpdate(LocalDateTime.now()).build();
+            Mockito.doThrow(new NegociosException(cidadeModel.getCityid())).when(cidadeService).delete(cidadeModel);
 
-            mockMvc.perform(delete("/buscarAtor "+ categoriaModel.toString())
+            mockMvc.perform(delete("/buscarCidade/" + cidadeModel.getCityid().toString())
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isNotFound());
 
