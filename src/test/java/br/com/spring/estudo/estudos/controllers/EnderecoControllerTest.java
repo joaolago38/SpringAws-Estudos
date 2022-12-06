@@ -1,9 +1,11 @@
 package br.com.spring.estudo.estudos.controllers;
 
-import br.com.spring.estudo.estudos.controllers.categoria.CategoriaController;
+import br.com.spring.estudo.estudos.controllers.endereco.EnderecoController;
 import br.com.spring.estudo.estudos.exception.NegociosException;
 import br.com.spring.estudo.estudos.model.CategoriaModel;
+import br.com.spring.estudo.estudos.model.EnderecoModel;
 import br.com.spring.estudo.estudos.services.CategoriaService;
+import br.com.spring.estudo.estudos.services.EnderecoService;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
@@ -24,32 +26,36 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(CategoriaController.class)
+@WebMvcTest(EnderecoController.class)
 public class EnderecoControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private CategoriaService categoriaService;
+    private EnderecoService enderecoService;
 
         @Test
-        @DisplayName("Salva um novo Categoria")
-        public void createCategoria_whenPostMethod() throws Exception {
-            CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-            given(categoriaService.save(categoriaModel)).willReturn(categoriaModel);
-            mockMvc.perform(post("/buscarCategory")
+        @DisplayName("Salva um novo Endereco")
+        public void createEndereco_whenPostMethod() throws Exception {
+            EnderecoModel enderecoModel = EnderecoModel.builder().address("Rua Jau")
+                    .addressId(1).address2("Rua Mercurio").phone("019999889059")
+                    .lastUpdate(LocalDateTime.now()).cityId(1L).postalCode("37770743").district("Parque Universitario").build();
+            given(enderecoService.save(enderecoModel)).willReturn(enderecoModel);
+            mockMvc.perform(post("/buscarEndereco")
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(com.usersapi.endpoints.util.JsonUtil.toJson(categoriaModel)))
-                    .andExpect(status().is4xxClientError());
+                            .content(com.usersapi.endpoints.util.JsonUtil.toJson(enderecoModel)))
+                    .andExpect(status().isCreated());
 
         }
 
         @Test
         @DisplayName("Deleta um Categoria pelo id")
-        public void removeCategoriaById_whenDeleteMethod() throws Exception {
-            CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-            doNothing().when(categoriaService).delete(categoriaModel);
-            mockMvc.perform(delete("/buscarCategory/" + categoriaModel.toString())
+        public void removeEnderecoById_whenDeleteMethod() throws Exception {
+            EnderecoModel enderecoModel = EnderecoModel.builder().address("Rua Jau")
+                    .addressId(1).address2("Rua Mercurio").phone("019999889059")
+                    .lastUpdate(LocalDateTime.now()).cityId(1L).postalCode("37770743").district("Parque Universitario").build();
+            doNothing().when(enderecoService).delete(enderecoModel);
+            mockMvc.perform(delete("/buscarEndereco/" + enderecoModel.toString())
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isBadRequest());
         }
@@ -57,10 +63,12 @@ public class EnderecoControllerTest {
         @Test
         @DisplayName("Deleta um Categoria que nao existe")
         public void should_throw_exception_when_Categoria_doesnt_exist() throws Exception {
-            CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-            Mockito.doThrow(new NegociosException(categoriaModel.getCategoryId())).when(categoriaService).delete(categoriaModel);
+            EnderecoModel enderecoModel = EnderecoModel.builder().address("Rua Jau")
+                    .addressId(1).address2("Rua Mercurio").phone("019999889059")
+                    .lastUpdate(LocalDateTime.now()).cityId(1L).postalCode("37770743").district("Parque Universitario").build();
+            Mockito.doThrow(new NegociosException(enderecoModel.getAddressId())).when(enderecoService).delete(enderecoModel);
 
-            mockMvc.perform(delete("/buscarAtor "+ categoriaModel.toString())
+            mockMvc.perform(delete("/buscarEndereco "+ enderecoModel.toString())
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isNotFound());
 

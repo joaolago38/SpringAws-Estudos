@@ -1,7 +1,9 @@
 package br.com.spring.estudo.estudos.services;
 
 import br.com.spring.estudo.estudos.model.CategoriaModel;
+import br.com.spring.estudo.estudos.model.EnderecoModel;
 import br.com.spring.estudo.estudos.repositores.CategoriaRepository;
+import br.com.spring.estudo.estudos.repositores.EnderecoRespository;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
@@ -21,36 +23,40 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class EnderecoServiceTest {
     @Mock
-    private CategoriaRepository categoriaRespository;
+    private EnderecoRespository enderecoRespository;
     @InjectMocks
-    private CategoriaService categoriaService;
+    private EnderecoService enderecoService;
 
     @Test
     @DisplayName("Salvando um Categoria")
     public void whenSaveAtor_shouldReturnUmCategoria() {
-        CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-        when(categoriaRespository.save(ArgumentMatchers.any(CategoriaModel.class))).thenReturn(categoriaModel);
-        CategoriaModel created = categoriaService.save(categoriaModel);
-        assertThat(created.getCategoryId()).isSameAs(categoriaModel.getCategoryId());
-        verify(categoriaRespository).save(categoriaModel);
+        EnderecoModel enderecoModel = EnderecoModel.builder().address("Rua Jau")
+                .addressId(1).address2("Rua Mercurio").phone("019999889059")
+                .lastUpdate(LocalDateTime.now()).cityId(1L).postalCode("37770743").district("Parque Universitario").build();
+        when(enderecoRespository.save(ArgumentMatchers.any(EnderecoModel.class))).thenReturn(enderecoModel);
+        EnderecoModel created = enderecoService.save(enderecoModel);
+        assertThat(created.getAddressId()).isSameAs(enderecoModel.getAddressId());
+        verify(enderecoRespository).save(enderecoModel);
     }
 
     @Test
     @DisplayName("deletando um Categoria")
     public void whenGivenId_shouldDeleteCategoria_ifFound(){
-        CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-        lenient().when(categoriaRespository.findById(categoriaModel.getCategoryId())).thenReturn(Optional.of(categoriaModel));
-        categoriaService.delete(categoriaModel);
-        verify(categoriaRespository).delete(categoriaModel);
+        EnderecoModel enderecoModel = EnderecoModel.builder().address("Rua Jau")
+                .addressId(1).address2("Rua Mercurio").phone("019999889059")
+                .lastUpdate(LocalDateTime.now()).cityId(1L).postalCode("37770743").district("Parque Universitario").build();
+        lenient().when(enderecoRespository.findById(enderecoModel.getAddressId())).thenReturn(Optional.of(enderecoModel));
+        enderecoService.delete(enderecoModel);
+        verify(enderecoRespository).delete(enderecoModel);
     }
 
     @Test(expected = RuntimeException.class)
     @DisplayName("deletando um Categoria com exception")
     public void should_throw_exception_when_Categoria_doesnt_exist() {
-        CategoriaModel categoriaModel= null;
-        when(categoriaRespository.findById(categoriaModel.getCategoryId())).thenReturn(Optional.of(categoriaModel));
-        given(categoriaRespository.findById(anyInt())).willReturn(Optional.ofNullable(null));
-        verify(categoriaRespository).delete(categoriaModel);
+        EnderecoModel enderecoModel = null;
+        when(enderecoRespository.findById(enderecoModel.getAddressId())).thenReturn(Optional.of(enderecoModel));
+        given(enderecoRespository.findById(anyInt())).willReturn(Optional.ofNullable(null));
+        verify(enderecoRespository).delete(enderecoModel);
     }
 
 
