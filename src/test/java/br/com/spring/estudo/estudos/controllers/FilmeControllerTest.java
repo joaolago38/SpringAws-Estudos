@@ -1,9 +1,12 @@
 package br.com.spring.estudo.estudos.controllers;
 
 import br.com.spring.estudo.estudos.controllers.categoria.CategoriaController;
+import br.com.spring.estudo.estudos.controllers.filme.FilmeController;
 import br.com.spring.estudo.estudos.exception.NegociosException;
 import br.com.spring.estudo.estudos.model.CategoriaModel;
+import br.com.spring.estudo.estudos.model.FilmeModel;
 import br.com.spring.estudo.estudos.services.CategoriaService;
+import br.com.spring.estudo.estudos.services.FilmeService;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
@@ -24,43 +27,49 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(CategoriaController.class)
+@WebMvcTest(FilmeController.class)
 public class FilmeControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private CategoriaService categoriaService;
+    private FilmeService filmeService;
 
         @Test
-        @DisplayName("Salva um novo Categoria")
-        public void createCategoria_whenPostMethod() throws Exception {
-            CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-            given(categoriaService.save(categoriaModel)).willReturn(categoriaModel);
-            mockMvc.perform(post("/buscarCategory")
+        @DisplayName("Salva um novo Filme")
+        public void createFilme_whenPostMethod() throws Exception {
+            FilmeModel filmeModel = FilmeModel.builder().filmId(1).
+                    description("teste").languageId(1L).length(2).title("teste")
+                    .releaseYear("teste").rentalRate("teste").replacementCost("testes").build();
+            given(filmeService.save(filmeModel)).willReturn(filmeModel);
+            mockMvc.perform(post("/buscarFilme")
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(com.usersapi.endpoints.util.JsonUtil.toJson(categoriaModel)))
+                            .content(com.usersapi.endpoints.util.JsonUtil.toJson(filmeModel)))
                     .andExpect(status().is4xxClientError());
 
         }
 
         @Test
-        @DisplayName("Deleta um Categoria pelo id")
-        public void removeCategoriaById_whenDeleteMethod() throws Exception {
-            CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-            doNothing().when(categoriaService).delete(categoriaModel);
-            mockMvc.perform(delete("/buscarCategory/" + categoriaModel.toString())
+        @DisplayName("Deleta um Filme pelo id")
+        public void removeFilmeById_whenDeleteMethod() throws Exception {
+            FilmeModel filmeModel = FilmeModel.builder().filmId(1).
+                    description("teste").languageId(1L).length(2).title("teste")
+                    .releaseYear("teste").rentalRate("teste").replacementCost("testes").build();
+            doNothing().when(filmeService).delete(filmeModel);
+            mockMvc.perform(delete("/buscarFilme/" + filmeModel.toString())
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isBadRequest());
         }
 
         @Test
-        @DisplayName("Deleta um Categoria que nao existe")
-        public void should_throw_exception_when_Categoria_doesnt_exist() throws Exception {
-            CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-            Mockito.doThrow(new NegociosException(categoriaModel.getCategoryId())).when(categoriaService).delete(categoriaModel);
+        @DisplayName("Deleta um Filme que nao existe")
+        public void should_throw_exception_when_Filme_doesnt_exist() throws Exception {
+            FilmeModel filmeModel = FilmeModel.builder().filmId(1).
+                    description("teste").languageId(1L).length(2).title("teste")
+                    .releaseYear("teste").rentalRate("teste").replacementCost("testes").build();
+            Mockito.doThrow(new NegociosException(filmeModel.getFilmId())).when(filmeService).delete(filmeModel);
 
-            mockMvc.perform(delete("/buscarAtor "+ categoriaModel.toString())
+            mockMvc.perform(delete("/buscarAtor "+ filmeModel.toString())
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isNotFound());
 
