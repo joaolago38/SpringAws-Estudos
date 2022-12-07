@@ -1,9 +1,12 @@
 package br.com.spring.estudo.estudos.controllers;
 
 import br.com.spring.estudo.estudos.controllers.categoria.CategoriaController;
+import br.com.spring.estudo.estudos.controllers.filme.ator.FilmeAtorController;
 import br.com.spring.estudo.estudos.exception.NegociosException;
 import br.com.spring.estudo.estudos.model.CategoriaModel;
+import br.com.spring.estudo.estudos.model.FilmeAtorModel;
 import br.com.spring.estudo.estudos.services.CategoriaService;
+import br.com.spring.estudo.estudos.services.FilmeAtorService;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
@@ -24,32 +27,32 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(CategoriaController.class)
+@WebMvcTest(FilmeAtorController.class)
 public class FilmeAtorControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private CategoriaService categoriaService;
+    private FilmeAtorService filmeAtorService;
 
         @Test
-        @DisplayName("Salva um novo Categoria")
-        public void createCategoria_whenPostMethod() throws Exception {
-            CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-            given(categoriaService.save(categoriaModel)).willReturn(categoriaModel);
+        @DisplayName("Salva um novo FilmeAtor ")
+        public void createFilmeAtor_whenPostMethod() throws Exception {
+            FilmeAtorModel filmeAtorModel = FilmeAtorModel.builder().filmId(1).actorId(1).filmId(1).lastUpdate(LocalDateTime.now()).build();
+            given(filmeAtorService.save(filmeAtorModel)).willReturn(filmeAtorModel);
             mockMvc.perform(post("/buscarCategory")
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(com.usersapi.endpoints.util.JsonUtil.toJson(categoriaModel)))
+                            .content(com.usersapi.endpoints.util.JsonUtil.toJson(filmeAtorModel)))
                     .andExpect(status().is4xxClientError());
 
         }
 
         @Test
         @DisplayName("Deleta um Categoria pelo id")
-        public void removeCategoriaById_whenDeleteMethod() throws Exception {
-            CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-            doNothing().when(categoriaService).delete(categoriaModel);
-            mockMvc.perform(delete("/buscarCategory/" + categoriaModel.toString())
+        public void removeFilmeAtorById_whenDeleteMethod() throws Exception {
+            FilmeAtorModel filmeAtorModel = FilmeAtorModel.builder().filmId(1).actorId(1).filmId(1).lastUpdate(LocalDateTime.now()).build();
+            doNothing().when(filmeAtorService).delete(filmeAtorModel);
+            mockMvc.perform(delete("/buscarFilmeAtor/" + filmeAtorModel.toString())
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isBadRequest());
         }
@@ -57,10 +60,10 @@ public class FilmeAtorControllerTest {
         @Test
         @DisplayName("Deleta um Categoria que nao existe")
         public void should_throw_exception_when_Categoria_doesnt_exist() throws Exception {
-            CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-            Mockito.doThrow(new NegociosException(categoriaModel.getCategoryId())).when(categoriaService).delete(categoriaModel);
+            FilmeAtorModel filmeAtorModel = FilmeAtorModel.builder().filmId(1).actorId(1).filmId(1).lastUpdate(LocalDateTime.now()).build();
+            Mockito.doThrow(new NegociosException(filmeAtorModel.getFilmId())).when(filmeAtorService).delete(filmeAtorModel);
 
-            mockMvc.perform(delete("/buscarAtor "+ categoriaModel.toString())
+            mockMvc.perform(delete("/buscarFilmeAtor "+ filmeAtorModel.toString())
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isNotFound());
 

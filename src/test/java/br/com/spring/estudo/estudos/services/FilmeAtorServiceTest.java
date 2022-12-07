@@ -1,7 +1,9 @@
 package br.com.spring.estudo.estudos.services;
 
 import br.com.spring.estudo.estudos.model.CategoriaModel;
+import br.com.spring.estudo.estudos.model.FilmeAtorModel;
 import br.com.spring.estudo.estudos.repositores.CategoriaRepository;
+import br.com.spring.estudo.estudos.repositores.FilmeActorRespository;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
@@ -21,36 +23,36 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class FilmeAtorServiceTest {
     @Mock
-    private CategoriaRepository categoriaRespository;
+    private FilmeActorRespository filmeAtorRespository;
     @InjectMocks
-    private CategoriaService categoriaService;
+    private FilmeAtorService categoriaService;
 
     @Test
-    @DisplayName("Salvando um Categoria")
-    public void whenSaveAtor_shouldReturnUmCategoria() {
-        CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-        when(categoriaRespository.save(ArgumentMatchers.any(CategoriaModel.class))).thenReturn(categoriaModel);
-        CategoriaModel created = categoriaService.save(categoriaModel);
-        assertThat(created.getCategoryId()).isSameAs(categoriaModel.getCategoryId());
-        verify(categoriaRespository).save(categoriaModel);
+    @DisplayName("Salvando um FilmeAtor")
+    public void whenSaveFilmeAtor_shouldReturnUmCategoria() {
+        FilmeAtorModel filmeAtorModel = FilmeAtorModel.builder().filmId(1).actorId(1).filmId(1).lastUpdate(LocalDateTime.now()).build();
+        when(filmeAtorRespository.save(ArgumentMatchers.any(FilmeAtorModel.class))).thenReturn(filmeAtorModel);
+        FilmeAtorModel created = categoriaService.save(filmeAtorModel);
+        assertThat(created.getFilmId()).isSameAs(filmeAtorModel.getFilmId());
+        verify(filmeAtorRespository).save(filmeAtorModel);
     }
 
     @Test
-    @DisplayName("deletando um Categoria")
-    public void whenGivenId_shouldDeleteCategoria_ifFound(){
-        CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-        lenient().when(categoriaRespository.findById(categoriaModel.getCategoryId())).thenReturn(Optional.of(categoriaModel));
-        categoriaService.delete(categoriaModel);
-        verify(categoriaRespository).delete(categoriaModel);
+    @DisplayName("deletando um FilmeAtor")
+    public void whenGivenId_shouldDeleteFilmeAtor_ifFound(){
+        FilmeAtorModel filmeAtorModel = FilmeAtorModel.builder().filmId(1).actorId(1).filmId(1).lastUpdate(LocalDateTime.now()).build();
+        lenient().when(filmeAtorRespository.findById(filmeAtorModel.getFilmId())).thenReturn(Optional.of(filmeAtorModel));
+        categoriaService.delete(filmeAtorModel);
+        verify(filmeAtorRespository).delete(filmeAtorModel);
     }
 
     @Test(expected = RuntimeException.class)
-    @DisplayName("deletando um Categoria com exception")
+    @DisplayName("deletando um FilmeAtor com exception")
     public void should_throw_exception_when_Categoria_doesnt_exist() {
-        CategoriaModel categoriaModel= null;
-        when(categoriaRespository.findById(categoriaModel.getCategoryId())).thenReturn(Optional.of(categoriaModel));
-        given(categoriaRespository.findById(anyInt())).willReturn(Optional.ofNullable(null));
-        verify(categoriaRespository).delete(categoriaModel);
+        FilmeAtorModel filmeAtorModel= null;
+        when(filmeAtorRespository.findById(filmeAtorModel.getFilmId())).thenReturn(Optional.of(filmeAtorModel));
+        given(filmeAtorRespository.findById(anyInt())).willReturn(Optional.ofNullable(null));
+        verify(filmeAtorRespository).delete(filmeAtorModel);
     }
 
 
