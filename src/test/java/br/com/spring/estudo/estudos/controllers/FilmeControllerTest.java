@@ -1,11 +1,8 @@
 package br.com.spring.estudo.estudos.controllers;
 
-import br.com.spring.estudo.estudos.controllers.categoria.CategoriaController;
 import br.com.spring.estudo.estudos.controllers.filme.FilmeController;
 import br.com.spring.estudo.estudos.exception.NegociosException;
-import br.com.spring.estudo.estudos.model.CategoriaModel;
 import br.com.spring.estudo.estudos.model.FilmeModel;
-import br.com.spring.estudo.estudos.services.CategoriaService;
 import br.com.spring.estudo.estudos.services.FilmeService;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -17,8 +14,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.time.LocalDateTime;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
