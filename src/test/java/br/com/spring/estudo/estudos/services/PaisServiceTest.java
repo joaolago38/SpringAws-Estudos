@@ -1,7 +1,7 @@
 package br.com.spring.estudo.estudos.services;
 
-import br.com.spring.estudo.estudos.model.CategoriaModel;
-import br.com.spring.estudo.estudos.repositores.CategoriaRepository;
+import br.com.spring.estudo.estudos.model.PaisModel;
+import br.com.spring.estudo.estudos.repositores.PaisRepository;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
@@ -21,36 +21,36 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class PaisServiceTest {
     @Mock
-    private CategoriaRepository categoriaRespository;
+    private PaisRepository paisRespository;
     @InjectMocks
-    private CategoriaService categoriaService;
+    private PaisService paisService;
 
     @Test
-    @DisplayName("Salvando um Categoria")
-    public void whenSaveAtor_shouldReturnUmCategoria() {
-        CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-        when(categoriaRespository.save(ArgumentMatchers.any(CategoriaModel.class))).thenReturn(categoriaModel);
-        CategoriaModel created = categoriaService.save(categoriaModel);
-        assertThat(created.getCategoryId()).isSameAs(categoriaModel.getCategoryId());
-        verify(categoriaRespository).save(categoriaModel);
+    @DisplayName("Salvando um Pais")
+    public void whenSavePais_shouldReturnUmCategoria() {
+        PaisModel paisModel = PaisModel.builder().country("Brasil").countryId(1).lastUpdate(LocalDateTime.now()).build();
+        when(paisRespository.save(ArgumentMatchers.any(PaisModel.class))).thenReturn(paisModel);
+        PaisModel created = paisService.save(paisModel);
+        assertThat(created.getCountryId()).isSameAs(paisModel.getCountryId());
+        verify(paisRespository).save(paisModel);
     }
 
     @Test
-    @DisplayName("deletando um Categoria")
-    public void whenGivenId_shouldDeleteCategoria_ifFound(){
-        CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-        lenient().when(categoriaRespository.findById(categoriaModel.getCategoryId())).thenReturn(Optional.of(categoriaModel));
-        categoriaService.delete(categoriaModel);
-        verify(categoriaRespository).delete(categoriaModel);
+    @DisplayName("deletando um Pais")
+    public void whenGivenId_shouldDeletePais_ifFound(){
+        PaisModel paisModel = PaisModel.builder().country("Brasil").countryId(1).lastUpdate(LocalDateTime.now()).build();
+        lenient().when(paisRespository.findById(paisModel.getCountryId())).thenReturn(Optional.of(paisModel));
+        paisService.delete(paisModel);
+        verify(paisRespository).delete(paisModel);
     }
 
     @Test(expected = RuntimeException.class)
-    @DisplayName("deletando um Categoria com exception")
+    @DisplayName("deletando um Pais com exception")
     public void should_throw_exception_when_Categoria_doesnt_exist() {
-        CategoriaModel categoriaModel= null;
-        when(categoriaRespository.findById(categoriaModel.getCategoryId())).thenReturn(Optional.of(categoriaModel));
-        given(categoriaRespository.findById(anyInt())).willReturn(Optional.ofNullable(null));
-        verify(categoriaRespository).delete(categoriaModel);
+        PaisModel paisModel = null;
+        when(paisRespository.findById(paisModel.getCountryId())).thenReturn(Optional.of(paisModel));
+        given(paisRespository.findById(anyInt())).willReturn(Optional.ofNullable(null));
+        verify(paisRespository).delete(paisModel);
     }
 
 

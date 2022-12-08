@@ -1,8 +1,6 @@
 package br.com.spring.estudo.estudos.services;
 
-import br.com.spring.estudo.estudos.model.CategoriaModel;
 import br.com.spring.estudo.estudos.model.PagamentoModel;
-import br.com.spring.estudo.estudos.repositores.CategoriaRepository;
 import br.com.spring.estudo.estudos.repositores.PagamentoRepository;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
