@@ -1,7 +1,7 @@
 package br.com.spring.estudo.estudos.services;
 
-import br.com.spring.estudo.estudos.model.CategoriaModel;
-import br.com.spring.estudo.estudos.repositores.CategoriaRepository;
+import br.com.spring.estudo.estudos.model.LinguagemModel;
+import br.com.spring.estudo.estudos.repositores.LinguagemRespository;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
@@ -21,36 +21,36 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class LinguagemServiceTest {
     @Mock
-    private CategoriaRepository categoriaRespository;
+    private LinguagemRespository linguagemRespository;
     @InjectMocks
-    private CategoriaService categoriaService;
+    private LinguagemService linguagemService;
 
     @Test
-    @DisplayName("Salvando um Categoria")
+    @DisplayName("Salvando um Linguagem")
     public void whenSaveAtor_shouldReturnUmCategoria() {
-        CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-        when(categoriaRespository.save(ArgumentMatchers.any(CategoriaModel.class))).thenReturn(categoriaModel);
-        CategoriaModel created = categoriaService.save(categoriaModel);
-        assertThat(created.getCategoryId()).isSameAs(categoriaModel.getCategoryId());
-        verify(categoriaRespository).save(categoriaModel);
+        LinguagemModel linguagemModel = LinguagemModel.builder().languageId(1).name("testes").lastUpdate(LocalDateTime.now()).build();
+        when(linguagemRespository.save(ArgumentMatchers.any(LinguagemModel.class))).thenReturn(linguagemModel);
+        LinguagemModel created = linguagemService.save(linguagemModel);
+        assertThat(created.getLanguageId()).isSameAs(linguagemModel.getLanguageId());
+        verify(linguagemRespository).save(linguagemModel);
     }
 
     @Test
-    @DisplayName("deletando um Categoria")
+    @DisplayName("deletando um Linguagem")
     public void whenGivenId_shouldDeleteCategoria_ifFound(){
-        CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-        lenient().when(categoriaRespository.findById(categoriaModel.getCategoryId())).thenReturn(Optional.of(categoriaModel));
-        categoriaService.delete(categoriaModel);
-        verify(categoriaRespository).delete(categoriaModel);
+        LinguagemModel linguagemModel = LinguagemModel.builder().languageId(1).name("testes").lastUpdate(LocalDateTime.now()).build();
+        lenient().when(linguagemRespository.findById(linguagemModel.getLanguageId())).thenReturn(Optional.of(linguagemModel));
+        linguagemService.delete(linguagemModel);
+        verify(linguagemRespository).delete(linguagemModel);
     }
 
     @Test(expected = RuntimeException.class)
-    @DisplayName("deletando um Categoria com exception")
+    @DisplayName("deletando um Linguagem com exception")
     public void should_throw_exception_when_Categoria_doesnt_exist() {
-        CategoriaModel categoriaModel= null;
-        when(categoriaRespository.findById(categoriaModel.getCategoryId())).thenReturn(Optional.of(categoriaModel));
-        given(categoriaRespository.findById(anyInt())).willReturn(Optional.ofNullable(null));
-        verify(categoriaRespository).delete(categoriaModel);
+        LinguagemModel linguagemModel = null;
+        when(linguagemRespository.findById(linguagemModel.getLanguageId())).thenReturn(Optional.of(linguagemModel));
+        given(linguagemRespository.findById(anyInt())).willReturn(Optional.ofNullable(null));
+        verify(linguagemRespository).delete(linguagemModel);
     }
 
 

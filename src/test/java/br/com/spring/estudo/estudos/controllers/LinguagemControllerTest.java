@@ -1,9 +1,12 @@
 package br.com.spring.estudo.estudos.controllers;
 
 import br.com.spring.estudo.estudos.controllers.categoria.CategoriaController;
+import br.com.spring.estudo.estudos.controllers.linguagem.LinguagemController;
 import br.com.spring.estudo.estudos.exception.NegociosException;
 import br.com.spring.estudo.estudos.model.CategoriaModel;
+import br.com.spring.estudo.estudos.model.LinguagemModel;
 import br.com.spring.estudo.estudos.services.CategoriaService;
+import br.com.spring.estudo.estudos.services.LinguagemService;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
@@ -24,43 +27,43 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(CategoriaController.class)
+@WebMvcTest(LinguagemController.class)
 public class LinguagemControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private CategoriaService categoriaService;
+    private LinguagemService linguagemService;
 
         @Test
-        @DisplayName("Salva um novo Categoria")
-        public void createCategoria_whenPostMethod() throws Exception {
-            CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-            given(categoriaService.save(categoriaModel)).willReturn(categoriaModel);
-            mockMvc.perform(post("/buscarCategory")
+        @DisplayName("Salva um novo Linguagem")
+        public void createLinguagem_whenPostMethod() throws Exception {
+            LinguagemModel linguagemModel = LinguagemModel.builder().languageId(1).name("testes").lastUpdate(LocalDateTime.now()).build();
+            given(linguagemService.save(linguagemModel)).willReturn(linguagemModel);
+            mockMvc.perform(post("/buscarLinguagem")
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(com.usersapi.endpoints.util.JsonUtil.toJson(categoriaModel)))
+                            .content(com.usersapi.endpoints.util.JsonUtil.toJson(linguagemModel)))
                     .andExpect(status().is4xxClientError());
 
         }
 
         @Test
-        @DisplayName("Deleta um Categoria pelo id")
-        public void removeCategoriaById_whenDeleteMethod() throws Exception {
-            CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-            doNothing().when(categoriaService).delete(categoriaModel);
-            mockMvc.perform(delete("/buscarCategory/" + categoriaModel.toString())
+        @DisplayName("Deleta um Linguagem pelo id")
+        public void removeLinguagemById_whenDeleteMethod() throws Exception {
+            LinguagemModel linguagemModel = LinguagemModel.builder().languageId(1).name("testes").lastUpdate(LocalDateTime.now()).build();
+            doNothing().when(linguagemService).delete(linguagemModel);
+            mockMvc.perform(delete("/buscarLinguagem/" + linguagemModel.toString())
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isBadRequest());
         }
 
         @Test
-        @DisplayName("Deleta um Categoria que nao existe")
-        public void should_throw_exception_when_Categoria_doesnt_exist() throws Exception {
-            CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-            Mockito.doThrow(new NegociosException(categoriaModel.getCategoryId())).when(categoriaService).delete(categoriaModel);
+        @DisplayName("Deleta um Linguagem que nao existe")
+        public void should_throw_exception_when_Linguagem_doesnt_exist() throws Exception {
+            LinguagemModel linguagemModel = LinguagemModel.builder().languageId(1).name("testes").lastUpdate(LocalDateTime.now()).build();
+            Mockito.doThrow(new NegociosException(linguagemModel.getLanguageId())).when(linguagemService).delete(linguagemModel);
 
-            mockMvc.perform(delete("/buscarAtor "+ categoriaModel.toString())
+            mockMvc.perform(delete("/buscarLinguagem "+ linguagemModel.toString())
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isNotFound());
 

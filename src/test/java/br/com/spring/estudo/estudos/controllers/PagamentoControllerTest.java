@@ -1,9 +1,13 @@
 package br.com.spring.estudo.estudos.controllers;
 
 import br.com.spring.estudo.estudos.controllers.categoria.CategoriaController;
+import br.com.spring.estudo.estudos.controllers.pagamento.PagamentoController;
 import br.com.spring.estudo.estudos.exception.NegociosException;
 import br.com.spring.estudo.estudos.model.CategoriaModel;
+import br.com.spring.estudo.estudos.model.LinguagemModel;
+import br.com.spring.estudo.estudos.model.PagamentoModel;
 import br.com.spring.estudo.estudos.services.CategoriaService;
+import br.com.spring.estudo.estudos.services.PagamentoService;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
@@ -24,43 +28,46 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(CategoriaController.class)
+@WebMvcTest(PagamentoController.class)
 public class PagamentoControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private CategoriaService categoriaService;
+    private PagamentoService pagamentoService;
 
         @Test
-        @DisplayName("Salva um novo Categoria")
+        @DisplayName("Salva um novo Pagamento")
         public void createCategoria_whenPostMethod() throws Exception {
-            CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-            given(categoriaService.save(categoriaModel)).willReturn(categoriaModel);
-            mockMvc.perform(post("/buscarCategory")
+            PagamentoModel pagamentoModel = PagamentoModel.builder().amount(1L).customerId(1L)
+                    .paymenId(1).paymentDate(LocalDateTime.now()).rentalId(1L).staffId(1L).build();
+            given(pagamentoService.save(pagamentoModel)).willReturn(pagamentoModel);
+            mockMvc.perform(post("/buscarPagamento")
                             .contentType(MediaType.APPLICATION_JSON)
-                            .content(com.usersapi.endpoints.util.JsonUtil.toJson(categoriaModel)))
+                            .content(com.usersapi.endpoints.util.JsonUtil.toJson(pagamentoModel)))
                     .andExpect(status().is4xxClientError());
 
         }
 
         @Test
-        @DisplayName("Deleta um Categoria pelo id")
+        @DisplayName("Deleta um Pagamento pelo id")
         public void removeCategoriaById_whenDeleteMethod() throws Exception {
-            CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-            doNothing().when(categoriaService).delete(categoriaModel);
-            mockMvc.perform(delete("/buscarCategory/" + categoriaModel.toString())
+            PagamentoModel pagamentoModel = PagamentoModel.builder().amount(1L).customerId(1L)
+                    .paymenId(1).paymentDate(LocalDateTime.now()).rentalId(1L).staffId(1L).build();
+            doNothing().when(pagamentoService).delete(pagamentoModel);
+            mockMvc.perform(delete("/buscarPagamento/" + pagamentoModel.toString())
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isBadRequest());
         }
 
         @Test
-        @DisplayName("Deleta um Categoria que nao existe")
+        @DisplayName("Deleta um Pagamento que nao existe")
         public void should_throw_exception_when_Categoria_doesnt_exist() throws Exception {
-            CategoriaModel categoriaModel = CategoriaModel.builder().categoryId(1).lastUpdate(LocalDateTime.now()).build();
-            Mockito.doThrow(new NegociosException(categoriaModel.getCategoryId())).when(categoriaService).delete(categoriaModel);
+            PagamentoModel pagamentoModel = PagamentoModel.builder().amount(1L).customerId(1L)
+                    .paymenId(1).paymentDate(LocalDateTime.now()).rentalId(1L).staffId(1L).build();
+            Mockito.doThrow(new NegociosException(pagamentoModel.getPaymenId())).when(pagamentoService).delete(pagamentoModel);
 
-            mockMvc.perform(delete("/buscarAtor "+ categoriaModel.toString())
+            mockMvc.perform(delete("/buscarPagamento "+ pagamentoModel.toString())
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isNotFound());
 
