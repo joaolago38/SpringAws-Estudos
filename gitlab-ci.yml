@@ -1,0 +1,34 @@
+include:
+  - project: 'DevOps/templates/ci_cd'
+    file: 'java_maven_ecs.yaml'
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  MIN_COVERAGE: $API_MIN_COVERAGE
+  JAVA_VERSION: "1.11.0"
+  JDK_VERSION: "11"
+  MAVEN_VERSION: "3.6.3-jdk11"
+
+###
+### GITFLOW REDE
+###
+package:
+  only:
+    - branches
+    - tags
+  variables:
+    appdynamics: "true"
+
+deploy_dev_ecs:
+  only:
+    - develop
+
+#Sonar Scanner coverage.
+unit_test:
+  allow_failure: false
+  artifacts:
+    paths:
+      - target/
+
+security_check:
+  allow_failure: false
